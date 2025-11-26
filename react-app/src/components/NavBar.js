@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
 import './NavBar.css';
-
+import { demoLogin } from '../store/session';
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
 
@@ -27,6 +27,9 @@ const NavBar = () => {
             <NavLink to='/trails' exact={true} activeClassName='active'>
               All Trails
             </NavLink>
+          </li>
+          <li>
+            <button onClick={demoLogin}>Demo User</button>
           </li>
           <li>
             <NavLink to='/states' exact={true} activeClassName='active'>

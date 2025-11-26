@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './Landing.css';
 
+import trailVideo from '../assets/find-trails.mp4';
 const Landing = () => {
     const user = useSelector((state) => state.session.user);
     const history = useHistory();
@@ -17,10 +18,12 @@ const Landing = () => {
     
     return (
         <div className="landing-container">
-            <video className="landing-video" autoPlay loop muted playsInline>
-                <source src={`${process.env.PUBLIC_URL}/assets/images/find-trails.mp4`} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+            {trailVideo ? (
+                <video className="landing-video" src={trailVideo} type="video/mp4" autoPlay loop muted playsInline/>
+            ) : (
+                <p>Your browser does not support the video tag</p>
+            )}
+       
             
             <div className="landing-overlay">
                 <div className="landing-content">
