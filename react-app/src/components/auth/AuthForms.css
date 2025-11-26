@@ -1,0 +1,110 @@
+/* Auth Forms Styling */
+:root {
+  --forest-green: #2C5F2D;
+  --moss-green: #5A7D5F;
+  --earth-brown: #6B4423;
+  --bark-brown: #4A3728;
+  --sky-blue: #87CEEB;
+  --stone-gray: #6E7C7C;
+  --cream-white: #F5F5DC;
+  --error-red: #DC3545;
+}
+
+form {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: var(--cream-white);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(44, 95, 45, 0.15);
+  animation: slideInUp 0.5s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+form > div {
+  margin-bottom: 1.5rem;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  color: var(--bark-brown);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--stone-gray);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--forest-green);
+  background-color: #fafaf8;
+  box-shadow: 0 0 0 3px rgba(44, 95, 45, 0.1);
+}
+
+form input::placeholder {
+  color: #999;
+}
+
+form button {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, var(--forest-green) 0%, var(--moss-green) 100%);
+  color: var(--cream-white);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
+}
+
+form button:hover {
+  background: linear-gradient(135deg, var(--moss-green) 0%, var(--forest-green) 100%);
+  box-shadow: 0 6px 16px rgba(44, 95, 45, 0.4);
+  transform: translateY(-2px);
+}
+
+form button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(44, 95, 45, 0.3);
+}
+
+/* Error Messages */
+form > div:first-child {
+  min-height: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+form > div:first-child div {
+  color: var(--error-red);
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}

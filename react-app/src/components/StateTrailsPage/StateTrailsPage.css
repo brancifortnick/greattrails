@@ -1,0 +1,200 @@
+.state-trails-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+.back-button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-button:hover {
+  background: #5568d3;
+  transform: translateX(-5px);
+}
+
+.state-header {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.state-header h1 {
+  font-size: 3rem;
+  color: #333;
+  margin: 0;
+}
+
+.state-code-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 30px;
+  border-radius: 25px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.no-trails {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.no-trails p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.trails-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.trail-item {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.trail-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.trail-image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.trail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.trail-item:hover .trail-image {
+  transform: scale(1.05);
+}
+
+.cross-state-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 107, 107, 0.9);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.trail-content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trail-name {
+  font-size: 2rem;
+  color: #333;
+  margin: 0 0 15px 0;
+}
+
+.trail-description {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  flex-grow: 1;
+}
+
+.trail-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  color: #667eea;
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .trail-item {
+    grid-template-columns: 1fr;
+  }
+  
+  .trail-image-container {
+    height: 250px;
+  }
+  
+  .trail-content {
+    padding: 20px;
+  }
+  
+  .trail-name {
+    font-size: 1.5rem;
+  }
+  
+  .state-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .state-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .state-code-badge {
+    font-size: 1.2rem;
+    padding: 8px 20px;
+  }
+  
+  .trail-stats {
+    gap: 15px;
+  }
+}
