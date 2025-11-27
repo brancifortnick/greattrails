@@ -5,6 +5,25 @@ import { getTrail, clearSingleTrail } from '../../store/trails';
 import { getTrailReviews, createReview, deleteReview } from '../../store/reviews';
 import { toggleCollection, getToggleStatus } from '../../store/collections';
 import './TrailDetail.css';
+// Use direct relative import; CRA doesn't resolve custom paths mapping for JS without extra config.
+
+import defaultTrail from '../../assets/default-trail.jpg'
+// Dynamically gather trail images (trail1.jpg ... trail50.jpg) from assets folder.
+// Path is relative from this file (components/Trails) up two levels to src/assets.
+const trailImages = {}; // id -> image module
+try {
+  const context = require.context('../../assets', false, /trail\d+\.jpg$/);
+  context.keys().forEach(key => {
+    const match = key.match(/trail(\d+)\.jpg$/);
+    if (match) {
+      const id = match[1];
+      const mod = context(key);
+      trailImages[id] = mod.default || mod; // webpack may wrap default
+    }
+  });
+} catch (e) {
+  // require.context may not exist in some test environments; ignore.
+}
 
 const TrailDetail = () => {
   const dispatch = useDispatch();
@@ -40,19 +59,19 @@ const TrailDetail = () => {
     };
   }, [dispatch, trailId, currentUser]);
 
-  const handleVisitedToggle = async () => {
+  const handleVisitedToggle = () => {
     const newVisited = !visited;
     setVisited(newVisited);
-    await dispatch(toggleCollection(trailId, newVisited, interested));
+    dispatch(toggleCollection(trailId, newVisited, interested));
   };
 
-  const handleInterestedToggle = async () => {
+  const handleInterestedToggle = () => {
     const newInterested = !interested;
     setInterested(newInterested);
-    await dispatch(toggleCollection(trailId, visited, newInterested));
+    dispatch(toggleCollection(trailId, visited, newInterested));
   };
 
-  const handleSubmitReview = async (e) => {
+  const handleSubmitReview = (e) => {
     e.preventDefault();
     setErrors([]);
 
@@ -61,7 +80,7 @@ const TrailDetail = () => {
       return;
     }
 
-    const result = await dispatch(createReview(trailId, reviewText));
+    const result = dispatch(createReview(trailId, reviewText));
     if (result) {
       setErrors(result);
     } else {
@@ -70,9 +89,9 @@ const TrailDetail = () => {
     }
   };
 
-  const handleDeleteReview = async (reviewId) => {
+  const handleDeleteReview = (reviewId) => {
     if (window.confirm('Are you sure you want to delete this review?')) {
-      await dispatch(deleteReview(reviewId));
+      dispatch(deleteReview(reviewId));
     }
   };
 
@@ -80,19 +99,22 @@ const TrailDetail = () => {
     return <div className="trail-detail-container">Loading...</div>;
   }
 
+  // Decide which image to show: backend image_url -> local mapped image by id -> default image
+  const imageSrc = trail.image_url || trailImages[String(trail.id)] || defaultTrail;
+
   return (
     <div className="trail-detail-container">
       <button className="back-button" onClick={() => history.goBack()}>
         ← Back to Trails
       </button>
 
-      <img 
-        src={trail.image_url || `/assets/images/trail${trail.id}.jpg`}
+      <img
+        src={imageSrc}
         alt={trail.name}
         className="trail-detail-hero-image"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = 'https://via.placeholder.com/1200x400/86C232/ffffff?text=Trail+Image';
+          e.target.src = defaultTrail; // fallback to local default instead of external placeholder
         }}
       />
 
